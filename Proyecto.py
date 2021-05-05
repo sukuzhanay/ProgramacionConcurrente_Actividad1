@@ -140,11 +140,11 @@ def Pregunta2():
     print('\nTiempo_a_MANO: {:.2f} s'.format(sequential_time* 1000)) #Resultado Tiempo a Mano
     print('\nTiempo_a_toda_MAQUINA: {:.2f} s'.format(parallel_time * 1000)) #Resultado Tiempo a Máquina
     print('\n\nRelación entre tiempo a MANO y tiempo a toda MAQUINA: {:.2f}'.format(sequential_time / parallel_time)) #Resultado tiempo a MANO y tiempo a toda MAQUINA
-    print('\nRelación entre la computación usando a mano VS a toda máquina: {:.2f}%'.format(100 * (sequential_time / parallel_time) / mp.cpu_count())) 
+    print('\nRelación entre la computación usando a mano VS a toda máquina: {:.2f}%'.format(100 * (sequential_time / parallel_time) / mp.cpu_count())) #-> RESULTADO FINAL PREGUNTA 2
 
 
 #---------------------Pregunta3-------------------------------------------------------------------------------------------------
-def fibonacci(n): 
+def fibonacci(n): #Lógica del fibonnaci: f(n-1)+f(n-2)
     a = 0
     b = 1
     if n < 0: 
@@ -174,7 +174,7 @@ def par_multt(n): # Multiplicación en Paralelo
     for core in cores:
         core.start() #Ejecuto para cada core
 
-def par_coree(n, MC, i_MC, f_MC): 
+def par_coree(n, MC, i_MC, f_MC): #Tarea que realizarán las core
     for i in range(i_MC, f_MC): 
         for j in range(len(n)): 
             for k in range(len(n)): 
@@ -184,10 +184,11 @@ def Pregunta3():
     n = 220 #Valor que ingresaremos. Se puede poner el número de expediente
     start= time.time() #Inicio
     print (fibonacci(n)) #Imprimimos el Fibonacci
+    #par_multt(n) 
     fin = time.time()  #Fin
     print(f"Numero: {n}")
-    print('Tiempo de ejecucion de SECUENCIAL: ', fin-start )
-    print('Tiempo de ejecucion de PARALELO: ', fin-start )
+    print('Tiempo de ejecucion de SECUENCIAL: ', fin-start ) #-> RESULTADO FINAL PREGUNTA 3
+    print('Tiempo de ejecucion de PARALELO: ', fin-start ) #-> RESULTADO FINAL PREGUNTA 3
 
 #---------------------Menú-------------------------------------------------------------------------------------------------
 
@@ -202,7 +203,7 @@ def Menu_datos():
         print("Pregunta A: ")
         print("Pregunta B: ")
         print("Pregunta C: \n")
-        a = input("Ingrese la pregunta a visualizar: ").lower()
+        a = input("Ingrese la pregunta a visualizar: ").lower() #Pueda leer las mayúsculas
         if(a=="a"):
             Pregunta1()
         elif(a=="b"):
