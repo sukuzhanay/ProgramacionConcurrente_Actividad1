@@ -3,6 +3,10 @@ import math
 import multiprocessing as mp # Para trabajar en paralelo
 import time
 
+#LOGIN:
+#Email: gianpaulcustodio1198@gmail.com
+#Número de Expediente: 22094704
+
 #---------------------Pregunta1-------------------------------------------------------------------------------------------------
 def sec_mult(A, B): # f() que calcula la mult. en secuencial, como toda la vida se ha hecho 
     C = [[0] * n_col_B for i in range(n_fil_A)] # Crear y poblar la matrix  C = A*B
@@ -13,12 +17,12 @@ def sec_mult(A, B): # f() que calcula la mult. en secuencial, como toda la vida 
     return C
 
 def par_mult(A, B): # f() que prepara el reparto de trabajo para la mult. en paralelo
-    num_cores = mp.cpu_count() # Obtengo los cores de mi pc
-    size_col = math.ceil(n_col_B/num_cores) # Columnas  a procesar x c/cpre, ver Excel adjunto
-    size_fil = math.ceil(n_fil_A/num_cores) # Filas a procesar x c/cpre, ver Excel adjunto
+    n_cores = mp.cpu_count() # Obtengo los cores de mi pc
+    size_col = math.ceil(n_col_B/n_cores) # Columnas  a procesar x c/cpre, ver Excel adjunto
+    size_fil = math.ceil(n_fil_A/n_cores) # Filas a procesar x c/cpre, ver Excel adjunto
     MC = mp.RawArray('i', n_fil_A * n_col_B) # Array MC de memoria compartida donde se almacenaran los resultados, ver excel adjunto
     cores = [] # Array para guardar los cores y su trabajo
-    for core in range(num_cores):# Asigno a cada core el trabajo que le toca, ver excel adjunto
+    for core in range(n_cores):# Asigno a cada core el trabajo que le toca, ver excel adjunto
         i_MC = min(core * size_fil, n_fil_A) # Calculo i para marcar inicio del trabajo del core en relacion a las filas
         f_MC = min((core + 1) * size_fil, n_fil_A) # Calculo f para marcar fin del trabajo del core, ver excel
         cores.append(mp.Process(target=par_core, args=(A, B, MC, i_MC, f_MC)))# Añado al Array los cores y su trabajo
@@ -158,7 +162,7 @@ def fibonacci(n):
                 print(b) 
         return b
 
-def par_mult(n): # Multiplicación en Paralelo
+def par_multt(n): # Multiplicación en Paralelo
     num_cores = mp.cpu_count() # Obtengo los core de la pc 
     tamano_n = math.ceil(n/num_cores) 
     MC = mp.RawArray('i', n) #Programación Paralela
@@ -166,22 +170,22 @@ def par_mult(n): # Multiplicación en Paralelo
     for core in range(num_cores):
         i_MC = min(core * tamano_n, n) #Inicio del trabajo del core
         f_MC = min((core + 1) * tamano_n, n) #Fin del trabajo del core
-        cores.append(mp.Process(target=par_core, args=(n, MC, i_MC, f_MC)))
+        cores.append(mp.Process(target=par_coree, args=(n, MC, i_MC, f_MC)))
     for core in cores:
         core.start() #Ejecuto para cada core
 
-def par_core(n, MC, i_MC, f_MC): 
+def par_coree(n, MC, i_MC, f_MC): 
     for i in range(i_MC, f_MC): 
         for j in range(len(n)): 
             for k in range(len(n)): 
                 MC[i*len(n) + j] += n[i][k] * n[k][j] 
 
 def Pregunta3():
-    n = 15 #Valor que ingresaremos
+    n = 220 #Valor que ingresaremos. Se puede poner el número de expediente
     start= time.time() #Inicio
     print (fibonacci(n)) #Imprimimos el Fibonacci
     fin = time.time()  #Fin
-    print("Numero: " + n)
+    print(f"Numero: {n}")
     print('Tiempo de ejecucion de SECUENCIAL: ', fin-start )
     print('Tiempo de ejecucion de PARALELO: ', fin-start )
 
@@ -190,20 +194,20 @@ def Pregunta3():
 def Menu_datos():
     a = input("Ingrese su email de la uem: ")
     b = input("Número de expediente: ")
-    if a=="aaa" and b=="123": 
+    if a=="gianpaulcustodio1198@gmail.com" and b=="22094704": 
         print("\n-------UNIVERSIDAD EUROPEA DE MADRID-------")
         print("\n----Escuela de Ingeniería Arquitectura y diseño----\n\n")
         print("*************MENU************\n")
         print("Bienvenido: " + a + " - " + b +"\n")
-        print("Pregunta 1: AAAA")
-        print("Pregunta 2: BBBB")
-        print("Pregunta 3: CCCC\n")
-        a = int(input("Ingrese la pregunta a visualizar: "))
-        if(a==1):
+        print("Pregunta A: ")
+        print("Pregunta B: ")
+        print("Pregunta C: \n")
+        a = input("Ingrese la pregunta a visualizar: ").lower()
+        if(a=="a"):
             Pregunta1()
-        elif(a==2):
+        elif(a=="b"):
             Pregunta2()
-        elif(a==3):
+        elif(a=="c"):
             Pregunta3()
         else:
             print("Seleccione una pregunta válida")
@@ -211,6 +215,7 @@ def Menu_datos():
         print("--! ACCESO DENEGADO !--")
 
 
+#Principal
 if __name__ == '__main__':
     num_expediente = 23 #Aqui colocamos nuestro número de expediente  !OBSERVACIÓN: Colocaré un valor pequeño para que no ralentizar el ordenador. El valor se puede cambiar a preferencia de uno. 
     A = [[random.randint(0,215) for i in range(6)] for j in range(num_expediente)] # Genero A[21535220][6]con num. aleatorios del 0 al 215, ver excel 
@@ -219,6 +224,5 @@ if __name__ == '__main__':
     n_col_A = len(A[0]) # Obtengo num de colunmas de A 
     n_fil_B = len(B) # Obtengo num de filas de B
     n_col_B = len(B[0]) # # Obtengo num de filas de B
-    #Importamos el menu
-    Menu_datos()
+    Menu_datos() #Importamos el menu
     
