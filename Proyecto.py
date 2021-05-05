@@ -133,10 +133,10 @@ def Pregunta2():
     if sequential_result != parallel_result:
         raise Exception('MAL')
 
-    print('\nTiempo_a_MANO: {:.2f} s'.format(sequential_time* 1000))
-    print('\nTiempo_a_toda_MAQUINA: {:.2f} s'.format(parallel_time * 1000))
-    print('\n\nRelación entre tiempo a MANO y tiempo a toda MAQUINA: {:.2f}'.format(sequential_time / parallel_time))
-    print('\nRelación entre la computación usando a mano VS a toda máquina: {:.2f}%'.format(100 * (sequential_time / parallel_time) / mp.cpu_count()))
+    print('\nTiempo_a_MANO: {:.2f} s'.format(sequential_time* 1000)) #Resultado Tiempo a Mano
+    print('\nTiempo_a_toda_MAQUINA: {:.2f} s'.format(parallel_time * 1000)) #Resultado Tiempo a Máquina
+    print('\n\nRelación entre tiempo a MANO y tiempo a toda MAQUINA: {:.2f}'.format(sequential_time / parallel_time)) #Resultado tiempo a MANO y tiempo a toda MAQUINA
+    print('\nRelación entre la computación usando a mano VS a toda máquina: {:.2f}%'.format(100 * (sequential_time / parallel_time) / mp.cpu_count())) 
 
 
 #---------------------Pregunta3-------------------------------------------------------------------------------------------------
