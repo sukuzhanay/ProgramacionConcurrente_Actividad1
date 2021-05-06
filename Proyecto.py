@@ -1,3 +1,4 @@
+#Recibida entrega
 import random # Para generar num. aleatorios en la A y B 
 import math
 import multiprocessing as mp # Para trabajar en paralelo
